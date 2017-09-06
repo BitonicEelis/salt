@@ -816,6 +816,10 @@ def linux_interfaces():
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT).communicate()[0]
         ifaces = _interfaces_ifconfig(salt.utils.stringutils.to_str(cmd))
+    else:
+        from salt.utils.glibc_network_interfaces import glibc_network_interfaces
+        ifaces = glibc_network_interfaces()
+
     return ifaces
 
 
